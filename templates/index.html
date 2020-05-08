@@ -1,0 +1,22 @@
+﻿{% extends "base.html" %}
+ 
+{% block content %}
+    {% if username == "admin" %}
+	<a href="/admin_only">For admins</a>
+    {% endif %}
+	</br>
+    <a href="/add_news">Add news</a>
+{% for item in news %}
+    <div class="alert alert-dark" role="alert">
+        <i><a href="/news/{{item[0]}}"><h2>{{item[1]}}</h2></a></i>
+        <div><i><font size="5">{{item[2]}}</font></i></div>
+	<a>Date: {{item[3]}}</a>
+	</br>
+	<a>Author: </a><a href="/{{item[4]}}">{{users[item[4]][0]}}</a>
+	</br>
+	{% if username == users[item[4]][1] or username == "admin" %}
+        	<a href="/delete_news/{{item[0]}}">Delete news</a>
+    	{% endif %}
+    </div>
+{% endfor %}
+{% endblock %}
